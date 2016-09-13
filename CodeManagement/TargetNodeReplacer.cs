@@ -58,13 +58,13 @@ namespace CodeManagement
                     {
                         //output to "replaced" file tracker
                         goodWriter.WriteLine(filePath);
-                        XElement targetNode = possibleTargetNodes.FirstOrDefault();
-                        //build import node
-                        XElement importNode = BuildImportNode(importProjCommand);
-                        //replace target with import
-                        targetNode = importNode;
-                        //save the document to the same file path
-                        projectFile.Save(filePath);
+                        //XElement targetNode = possibleTargetNodes.FirstOrDefault();
+                        ////build import node
+                        //XElement importNode = BuildImportNode(importProjCommand);
+                        ////replace target with import
+                        //targetNode = importNode;
+                        ////save the document to the same file path
+                        //projectFile.Save(filePath);
                     }
                 }
             }
