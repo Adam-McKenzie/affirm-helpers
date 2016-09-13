@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeManagement", "CodeManagement\CodeManagement.csproj", "{7E4BA8AD-A5D7-4226-935B-BDFCA727E0AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigHelper", "ConfigHelper\ConfigHelper.csproj", "{FF3F074E-48C7-414E-B006-672609BB9C53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{7E4BA8AD-A5D7-4226-935B-BDFCA727E0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E4BA8AD-A5D7-4226-935B-BDFCA727E0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E4BA8AD-A5D7-4226-935B-BDFCA727E0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF3F074E-48C7-414E-B006-672609BB9C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF3F074E-48C7-414E-B006-672609BB9C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF3F074E-48C7-414E-B006-672609BB9C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF3F074E-48C7-414E-B006-672609BB9C53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
