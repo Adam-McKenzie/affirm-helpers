@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace CodeManagement
@@ -58,13 +59,23 @@ namespace CodeManagement
                     {
                         //output to "replaced" file tracker
                         goodWriter.WriteLine(filePath);
-                        //XElement targetNode = possibleTargetNodes.FirstOrDefault();
+                        XElement targetNode = possibleTargetNodes.FirstOrDefault();
                         ////build import node
-                        //XElement importNode = BuildImportNode(importProjCommand);
-                        ////replace target with import
-                        //targetNode = importNode;
-                        ////save the document to the same file path
-                        //projectFile.Save(filePath);
+                        XElement importNode = BuildImportNode(importProjCommand);
+                        //add importnode after the target node
+                        targetNode.AddBeforeSelf(importNode);
+                        //comment out the target node
+                        targetNode.ReplaceWith(new XComment(targetNode.ToString()));
+
+                        //string targetRemovedNamespace = targetNode.ToString();
+                        //targetRemovedNamespace = Regex.Replace(targetRemovedNamespace, "xmlns=\".*\"", "");
+
+                        //targetNode = XElement.Parse(targetRemovedNamespace);
+                        //save the document to the same file path
+                        string removedNullNamespace = projectFile.ToString();
+                        removedNullNamespace = Regex.Replace(removedNullNamespace, "xmlns=\"\"", "");
+                        XDocument docToSave = XDocument.Parse(removedNullNamespace);
+                        docToSave.Save(filePath);
                     }
                 }
             }
@@ -82,6 +93,13 @@ namespace CodeManagement
         {
             XElement importNode = new XElement("Import",
                                                 new XAttribute("Project", importProjCommand));
+            string nameSpaceGone = importNode.ToString();
+
+            //<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+            string nameSpaceRegEx = "xmlns=\".*\"";
+            nameSpaceGone = Regex.Replace(nameSpaceGone, nameSpaceRegEx, "");
+            importNode = XElement.Parse(nameSpaceGone);
             return importNode;
         }
         //need to get all project files (will end with .csproj, but not .vspscc)
