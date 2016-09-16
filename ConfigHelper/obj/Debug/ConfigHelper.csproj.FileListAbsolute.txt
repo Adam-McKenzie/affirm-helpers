@@ -1,0 +1,5 @@
+C:\projects\AffirmHelper\ConfigHelper\bin\Debug\ConfigHelper.exe
+C:\projects\AffirmHelper\ConfigHelper\bin\Debug\ConfigHelper.pdb
+C:\projects\AffirmHelper\ConfigHelper\obj\Debug\ConfigHelper.csprojResolveAssemblyReference.cache
+C:\projects\AffirmHelper\ConfigHelper\obj\Debug\ConfigHelper.exe
+C:\projects\AffirmHelper\ConfigHelper\obj\Debug\ConfigHelper.pdb
