@@ -96,14 +96,14 @@ namespace ConfigHelper
 
             /*********************  BASE CONFIG BUILDER SERVICE STUFF *****************/
 
-            //const string inputPath = @"C:\ADMServer2008\Engagements\2129_0001_Morgan_Stanley_AFFIRM_2_1\AdditionalFiles\Configuration\DistributorMaster";
-            //const string outputPath = @"C:\TestFiles\MSSB\BaseConfigBuilder\outputPath\dm";
-            //string basePath = string.Format(@"{0}\{1}",outputPath,"BASE.config");
+            //const string inputPath = @"C:\ADMServer2008\Engagements\2129_0001_Morgan_Stanley_AFFIRM_2_1\AdditionalFiles\Configuration\FMS_Custom";
+            //const string outputPath = @"C:\TestFiles\MSSB\BaseConfigBuilder\outputPath\fmscustom";
+            //string basePath = string.Format(@"{0}\{1}", outputPath, "BASE.config");
 
             //ConfigBuilderService builderService = new ConfigBuilderService();
             //builderService.CreateBaseFile(inputPath, outputPath);
             //List<string> environments = new List<string> { "dev", "qa", "uat", "prod" };
-            //foreach (string env in environments) 
+            //foreach (string env in environments)
             //{
             //    builderService.CreateTransform(inputPath, outputPath, basePath, env);
             //}
@@ -113,27 +113,65 @@ namespace ConfigHelper
 
 
             /********************  Config Compare stuff **************************************/
-            string transformPath = @"C:\TestFiles\MSSB\BaseConfigBuilder\outputPath\fmscustom\prodtransform.config";
-            string oldConfigPath = @"C:\ADMServer2008\Engagements\2129_0001_Morgan_Stanley_AFFIRM_2_1\AdditionalFiles\Configuration\FMS_Custom\FMSProcess.exe.prod.config";
-            //XDocument transformed = null;
-            //XDocument oldConfig = null;
-            //using (System.IO.TextReader transformReader = new System.IO.StreamReader(transformPath))
-            //using (System.IO.TextReader oldConfigReader = new System.IO.StreamReader(oldConfigPath))
-            //{
-            //    transformed = XDocument.Parse(transformReader.ReadToEnd());
-            //    oldConfig = XDocument.Parse(oldConfigReader.ReadToEnd());
-            //}
-            ////pull out comments 
-            //oldConfig.Root.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment).Remove();
-            //transformed.Root.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment).Remove();
+            //string transformPath = @"C:\TestFiles\MSSB\BaseConfigBuilder\outputPath\fmscustom\prodtransform.config";
+            //string oldConfigPath = @"C:\ADMServer2008\Engagements\2129_0001_Morgan_Stanley_AFFIRM_2_1\AdditionalFiles\Configuration\FMS_Custom\FMSProcess.exe.prod.config";
+            ////XDocument transformed = null;
+            ////XDocument oldConfig = null;
+            ////using (System.IO.TextReader transformReader = new System.IO.StreamReader(transformPath))
+            ////using (System.IO.TextReader oldConfigReader = new System.IO.StreamReader(oldConfigPath))
+            ////{
+            ////    transformed = XDocument.Parse(transformReader.ReadToEnd());
+            ////    oldConfig = XDocument.Parse(oldConfigReader.ReadToEnd());
+            ////}
+            //////pull out comments 
+            ////oldConfig.Root.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment).Remove();
+            ////transformed.Root.DescendantNodes().Where(x => x.NodeType == XmlNodeType.Comment).Remove();
 
             ////try to sort the child elements to test deepEquals
             //oldConfig = XDocument.Parse(oldConfig.Root.Elements().OrderBy(x => x.Name.LocalName).FirstOrDefault().ToString());
             //transformed = XDocument.Parse(transformed.Root.Elements().OrderBy(x => x.Name.LocalName).FirstOrDefault().ToString());
             //.OrderBy(e=>e.Attribute("name").Value)
+            
+
+            //get all files from 
             ConfigCompare comparer = new ConfigCompare();
-            bool equalityTest = comparer.CompareConfigs(transformPath, oldConfigPath);
-            Console.WriteLine("Equality Test is : " + equalityTest);
+
+            List<string> environments = new List<string> { "dev", "qa", "uat", "prod" };
+
+            string targetFolder = @"C:\TestFiles\MSSB\BaseConfigBuilder\outputPath\dm";
+            string workingFolder = @"C:\ADMServer2008\Engagements\2129_0001_Morgan_Stanley_AFFIRM_2_1\AdditionalFiles\Configuration\DistributorMaster";
+            string resultOutputPath = @"C:\TestFiles\MSSB\BaseConfigBuilder\outputPath\resultFromTransforms.txt";
+
+            foreach (string env in environments)
+            {
+                //create working config path
+                string workingConfigPath = string.Format(@"{0}\Web.{1}.config", workingFolder, env);
+                //create transformed config path
+                string transformedConfigPath = string.Format(@"{0}\Transform.{1}.config", targetFolder, env);
+
+                using (System.IO.TextWriter resultWriter = new System.IO.StreamWriter(resultOutputPath, true))
+                {
+                    if (comparer.CompareConfigs(workingConfigPath, transformedConfigPath))
+                    {
+                        resultWriter.WriteLine("{0} - MATCHED {1}", transformedConfigPath, workingConfigPath);
+                    }
+                    else
+                    {
+                        resultWriter.WriteLine("{0} - DOES NOT MATCH!!!! {1}", transformedConfigPath, workingConfigPath);
+                    }
+                }
+            }
+            
+
+
+
+            //ConfigBuilderService builderService = new ConfigBuilderService();
+            //builderService.CreateBaseFile(inputPath, outputPath);
+            //List<string> environments = new List<string> { "dev", "qa", "uat", "prod" };
+            //foreach (string env in environments)
+            //{
+            //    builderService.CreateTransform(inputPath, outputPath, basePath, env);
+            //}
            
             /************************************************************************************/
         }

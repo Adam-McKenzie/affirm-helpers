@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeManagement", "CodeManagement\CodeManagement.csproj", "{7E4BA8AD-A5D7-4226-935B-BDFCA727E0AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigHelper", "ConfigHelper\ConfigHelper.csproj", "{FF3F074E-48C7-414E-B006-672609BB9C53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AffirmHelper.PsModules", "AffirmHelper.PsModules\AffirmHelper.PsModules.csproj", "{751E6CC6-ADFB-44C3-97F2-68520641FE62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,10 @@ Global
 		{FF3F074E-48C7-414E-B006-672609BB9C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF3F074E-48C7-414E-B006-672609BB9C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF3F074E-48C7-414E-B006-672609BB9C53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{751E6CC6-ADFB-44C3-97F2-68520641FE62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{751E6CC6-ADFB-44C3-97F2-68520641FE62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{751E6CC6-ADFB-44C3-97F2-68520641FE62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{751E6CC6-ADFB-44C3-97F2-68520641FE62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

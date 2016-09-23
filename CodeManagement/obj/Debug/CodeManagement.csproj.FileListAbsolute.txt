@@ -1,5 +1,0 @@
-C:\projects\AffirmHelper\CodeManagement\obj\Debug\CodeManagement.csprojResolveAssemblyReference.cache
-C:\projects\AffirmHelper\CodeManagement\bin\Debug\CodeManagement.exe
-C:\projects\AffirmHelper\CodeManagement\bin\Debug\CodeManagement.pdb
-C:\projects\AffirmHelper\CodeManagement\obj\Debug\CodeManagement.exe
-C:\projects\AffirmHelper\CodeManagement\obj\Debug\CodeManagement.pdb
