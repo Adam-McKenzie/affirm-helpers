@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,14 +18,17 @@ namespace CodeManagement
         string unchangedFileOutputPath = @"C:\TestFiles\CodeManagement\outputPath\ReplaceNodeUnchangedOutput.txt";
 
 
-        string savedFilePath = @"C:\Users\amckenzie\Documents\TestFiles\ADMServer2008\";
+        //string savedFilePath = @"C:\TestFiles\ADMServer2008\";
 
         public void ReplaceTargetsWithImports(string fileName)
         {
-            string filePath = savedFilePath + fileName;
+            //unlock the file
+            FileInfo fileInfo = new System.IO.FileInfo(fileName);
+            if (fileInfo.IsReadOnly) fileInfo.IsReadOnly = false;
+            //string filePath = savedFilePath + fileName;
             //get file into an XDocument
             XDocument projectFile = null;
-            using (System.IO.TextReader reader = new System.IO.StreamReader(filePath))
+            using (System.IO.TextReader reader = new System.IO.StreamReader(fileName))
             {
                 projectFile = XDocument.Parse(reader.ReadToEnd());
             }
@@ -53,12 +57,12 @@ namespace CodeManagement
                     if (possibleTargetNodes.Count() > 1)
                     {
                         //output to file and flag as a problem
-                        errorWriter.WriteLine(filePath);
+                        errorWriter.WriteLine(fileName);
                     }
                     else
                     {
                         //output to "replaced" file tracker
-                        goodWriter.WriteLine(filePath);
+                        goodWriter.WriteLine(fileName);
                         XElement targetNode = possibleTargetNodes.FirstOrDefault();
                         ////build import node
                         XElement importNode = BuildImportNode(importProjCommand);
@@ -75,7 +79,7 @@ namespace CodeManagement
                         string removedNullNamespace = projectFile.ToString();
                         removedNullNamespace = Regex.Replace(removedNullNamespace, "xmlns=\"\"", "");
                         XDocument docToSave = XDocument.Parse(removedNullNamespace);
-                        docToSave.Save(filePath);
+                        docToSave.Save(fileName);
                     }
                 }
             }
@@ -84,7 +88,7 @@ namespace CodeManagement
                 //for now we will track files that did not contain this node
                 using (System.IO.TextWriter unchangedWriter = new System.IO.StreamWriter(unchangedFileOutputPath,true))
                 {
-                    unchangedWriter.WriteLine(filePath);
+                    unchangedWriter.WriteLine(fileName);
                 }
             }
         }
